@@ -57,26 +57,28 @@ define(["Inheritance","EventDispatcher"],
       /**
        * @private
        */
-      error: function(op,message) {
-        this.dispatchEvent("onError",[op,message]);
+      error: function(message) {
+        this.dispatchEvent("onError",[message]);
       },
       
       /**
        * @private
        */
-      sendRoomMessage: function(command,room) {
+      sendRoomMessage: function(command,sequence,room) {
         if (!this.rooms[room]) {
           return;
         }
-        this.send(command);
+        this.sendMessage(command,sequence);
       },
       
       /**
        * @private
        */
-      sendMessage: function(command) {
-        //TODO check connection
-        this.client.sendMessage(command); //TODO listen outcome
+      sendMessage: function(command,sequence) {
+        if (!this.playing) {
+          return;
+        }
+        this.client.sendMessage(command,sequence,0,this);
       },
       
       enterRoom: function(room) {
@@ -93,23 +95,23 @@ define(["Inheritance","EventDispatcher"],
        * @private
        */
       enterRoomInternal: function(room) {
-        this.send("enter|"+room);
+        this.sendMessage("enter|"+room,room);
       },
       
       exitRoom: function(room) {
-        this.sendRoomMessage("leave|"+room,room);
+        this.sendRoomMessage("leave|"+room,room,room);
       },
       
       grab: function(room) {
-        this.sendRoomMessage("grab|"+room,room);
+        this.sendRoomMessage("grab|"+room,"3D",room);
       },
       
       release: function(room) {
-        this.sendRoomMessage("release|"+room,room);
+        this.sendRoomMessage("release|"+room,"3D",room);
       },
       
       move: function(room,x,y,z) {
-        this.sendRoomMessage("move|"+room,room);
+        this.sendRoomMessage("move|"+room,"3D",room);
       },
       
       changeNick: function(newNick) {
@@ -121,7 +123,7 @@ define(["Inheritance","EventDispatcher"],
        * @private
        */
       sendNick: function() {
-        this.send("nick|"+this.nick);
+        this.sendMessage("nick|"+this.nick,"nick");
       },
       
       changeStatus: function(newStatus) {
@@ -133,10 +135,21 @@ define(["Inheritance","EventDispatcher"],
        * @private
        */
       sendStatus: function() {
-        this.send("status|"+this.status);
+        this.sendMessage("status|"+this.status,"status");
+      },
+      
+      //message listener
+     
+      // onDiscarded onAbort onProcessed -> do nothing
+      
+      onDeny: function(originalMessage,code,message) {
+        //Event handler that is called by Lightstreamer when the related message has been processed by the Server but the expected processing outcome could not be achieved for any reason.
+        this.error(message);
+      },
+      
+      onError: function() {
+        this.error("Unexpected error");
       }
-      
-      
   };
   
   Inheritance(Player,EventDispatcher,true,true);
