@@ -24,27 +24,26 @@ define(["Inheritance","EventDispatcher"],
     this.status = status;
     
     this.rooms = {};
-    
-    this.client.addListener(this);
-    
+    this.playing = false;
   };
   
   Player.prototype = {
     
       ready: function() {
+        
         if (this.playing) {
           return;
         }
         this.playing = true;
-        
+       
         //conf nick & status
         this.sendNick();
         this.sendStatus();
         
         //re-enter rooms
-        for (var i in rooms) {
+        for (var i in this.rooms) {
           this.enterRoomInternal(i);
-        }
+        } 
       },
       
       reset: function() {
@@ -123,6 +122,9 @@ define(["Inheritance","EventDispatcher"],
        * @private
        */
       sendNick: function() {
+        if (!this.nick) {
+          return;
+        }
         this.sendMessage("nick|"+this.nick,"nick");
       },
       
@@ -135,6 +137,9 @@ define(["Inheritance","EventDispatcher"],
        * @private
        */
       sendStatus: function() {
+        if (!this.status) {
+          return;
+        }
         this.sendMessage("status|"+this.status,"status");
       },
       
@@ -153,6 +158,6 @@ define(["Inheritance","EventDispatcher"],
   };
   
   Inheritance(Player,EventDispatcher,true,true);
-  return new Player;
+  return Player;
   
 });
