@@ -7,10 +7,10 @@ define(function() {
       
     SERVER: "http://localhost",
     ADAPTER: "LEAPDEMO",
-    LOG_UPDATES_ON_CONSOLE: true,
+    LOG_UPDATES_ON_CONSOLE: false,
     
     MAX_SIZE: {
-     x:85,
+     x:80,
      y:45,
      z:60
     },
