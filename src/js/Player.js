@@ -110,7 +110,7 @@ define(["Inheritance","EventDispatcher"],
       },
       
       move: function(room,x,y,z) {
-        this.sendRoomMessage("move|"+room,"3D",room);
+        this.sendRoomMessage("move|"+room+"|"+x+"|"+y+"|"+z,"3D",room);
       },
       
       changeNick: function(newNick) {
