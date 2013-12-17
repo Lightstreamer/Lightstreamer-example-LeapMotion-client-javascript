@@ -33,6 +33,8 @@ define(["./Constants","./Cube"],
     this.players = {};
     this.field = field;
     
+    this.localPlayerKey = null;
+    
     this.extraInfo = null;
     this.showExtraInfo(true);
   };
@@ -49,6 +51,10 @@ define(["./Constants","./Cube"],
           });
           this.extraInfo = newV;
         } 
+      },
+      
+      setLocalPlayerKey: function(key) {
+        this.localPlayerKey = key;
       },
       
       onItemUpdate: function(itemUpdate) {
@@ -94,7 +100,7 @@ define(["./Constants","./Cube"],
           return;
         }
 
-        this.players[key] = new Cube(key,Constants.OTHER,this.field,this.extraInfo); //TODO recognize thyself
+        this.players[key] = new Cube(key,key == this.localPlayerKey ? Constants.OWN : Constants.OTHER,this.field,this.extraInfo);
       },
       getPlayer: function(key) {
         return this.players[key];
