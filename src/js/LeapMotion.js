@@ -13,10 +13,39 @@ Copyright 2013 Weswit s.r.l.
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-define(["Inheritance","EventDispatcher"],
-    function(Inheritance,EventDispatcher) {
+define(["Inheritance","EventDispatcher","./Constants"],
+    function(Inheritance,EventDispatcher,Constants) {
   
   var FINGERS_OF_FIST = 1;
+  
+  var POSITIONS = {
+      x: 0,
+      y: 1,
+      z: 2
+  };
+  
+  function convert(frame,leapPos,axis) {
+    var pos = POSITIONS[axis];
+
+    var converter = frame.interactionBox.size[pos]/(Constants.MAX_SIZE[axis]*2); //TODO not sure if frame.interactionBox.size can change overtime or not
+    var converted = leapPos[pos]/converter;
+    
+    if (axis == "y") {
+      val = (converted/2)-Constants.MAX_SIZE[axis];
+    } else {
+      val = converted/2;
+    }
+    
+    if (Math.abs(val) > Constants.MAX_SIZE[axis]) {
+      if (val > 0) {
+        val = Constants.MAX_SIZE[axis]-1;
+      } else {
+        val = -(Constants.MAX_SIZE[axis]-1);
+      }
+    }
+    return val;
+  }
+  
   
   var LeapMotion = function() {
     this.initDispatcher();
@@ -52,7 +81,15 @@ define(["Inheritance","EventDispatcher"],
           return;
         }
         this.setFist(hand.fingers.length <= FINGERS_OF_FIST);
+       
+        var pos = [
+                   convert(frame,hand.palmPosition,"x"),
+                   convert(frame,hand.palmPosition,"y"),
+                   convert(frame,hand.palmPosition,"z")
+                   ];
         
+        this.dispatchEvent(this.isFist() ? "onFistMove" : "onPalmMove",pos);
+
       },
       
       /**
@@ -79,11 +116,11 @@ define(["Inheritance","EventDispatcher"],
       },
       
       setFist: function(isFist) {
-       if (this.fist == isFist) {
-         return;
-       }
-       this.dispatchEvent(isFist ? "onFist" : "onFistReleased"); //TODO give info about the forces 
-       this.fist = isFist;
+        if (this.fist == isFist) {
+          return;
+        }
+        this.dispatchEvent(isFist ? "onFist" : "onFistReleased"); //TODO give info about the forces 
+        this.fist = isFist;
       }
       
       
