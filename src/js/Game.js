@@ -114,7 +114,6 @@ define(["./Constants","./Cube"],
         
         itemUpdate.forEachChangedField(function(name,pos,val) {
           var tc = BRIDGE_CALL[name];
-          console.log(tc + " - " + val);
           if (val !== null && tc) {
             if (CONVERT[name]) {
               val = getMyDouble(fromBase64(val));
