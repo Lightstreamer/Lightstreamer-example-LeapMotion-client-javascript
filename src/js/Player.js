@@ -105,8 +105,8 @@ define(["Inheritance","EventDispatcher"],
         this.sendRoomMessage("grab|"+room,"3D",room);
       },
       
-      release: function(room) {
-        this.sendRoomMessage("release|"+room,"3D",room);
+      release: function(room,sx,sy,sz) {
+        this.sendRoomMessage("release|"+room+"|"+sx+"|"+sy+"|"+sz,"3D",room);
       },
       
       move: function(room,x,y,z) {
