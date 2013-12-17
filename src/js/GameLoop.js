@@ -1,12 +1,12 @@
 define(["Executor"],function(Executor) {
   
-  var GameLoop = function(game,field,frameRate,baseRate) {
+  var GameLoop = function(game,field,frameInterval,baseRate) {
     this.thread = null;
     this.game = game;
     this.field = field;
     
-    this.frameRate = frameRate;
-    this.rateFactor = frameRate/baseRate;
+    this.frameInterval = frameInterval;
+    this.rateFactor = frameInterval/baseRate;
   };
   
   GameLoop.prototype = {
@@ -14,7 +14,7 @@ define(["Executor"],function(Executor) {
        if (this.thread) {
          return;
        }
-       this.thread = Executor.addRepetitiveTask(this.calculate,this.frameRate,this);
+       this.thread = Executor.addRepetitiveTask(this.calculate,this.frameInterval,this);
        
      },
      stop: function() {

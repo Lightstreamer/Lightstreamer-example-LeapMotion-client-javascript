@@ -15,7 +15,7 @@ define(function() {
      z:60
     },
     
-    FRAME_RATE: 50,
+    FRAME_INTERVAL: 50,
     BASE_RATE: 10
   };
   
