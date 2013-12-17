@@ -70,6 +70,8 @@ define(["Inheritance","EventDispatcher","./Constants"],
         });
       },
       
+     
+      
       /**
        * @private
        */
@@ -80,7 +82,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
           this.setFist(false); //remove the hand == remove the fist
           return;
         }
-        this.setFist(hand.fingers.length <= FINGERS_OF_FIST);
+        this.setFist(hand,hand.fingers.length <= FINGERS_OF_FIST);
        
         var pos = [
                    convert(frame,hand.palmPosition,"x"),
@@ -88,6 +90,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
                    convert(frame,hand.palmPosition,"z")
                    ];
         
+       
         this.dispatchEvent(this.isFist() ? "onFistMove" : "onPalmMove",pos);
 
       },
@@ -115,11 +118,19 @@ define(["Inheritance","EventDispatcher","./Constants"],
         return this.fist;
       },
       
-      setFist: function(isFist) {
+      setFist: function(hand,isFist) {
         if (this.fist == isFist) {
           return;
         }
-        this.dispatchEvent(isFist ? "onFist" : "onFistReleased"); //TODO give info about the forces 
+        var speeds = [];
+        if (hand) {
+          for (var i=0; i<3; i++) {
+            speeds[i] = Math.round(hand.palmVelocity[i]||0);
+          }
+        } else {
+          speeds = [0,0,0];
+        }
+        this.dispatchEvent(isFist ? "onFist" : "onFistReleased",speeds); //TODO give info about the forces 
         this.fist = isFist;
       }
       
