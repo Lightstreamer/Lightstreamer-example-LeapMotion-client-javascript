@@ -111,13 +111,13 @@ define(["./Constants","./Cube"],
           //TODO error?
           return;
         }
-       
+        
         itemUpdate.forEachChangedField(function(name,pos,val) {
           var tc = BRIDGE_CALL[name];
           console.log(tc + " - " + val);
           if (val !== null && tc) {
             if (CONVERT[name]) {
-              val = getMyFloat(fromBase64(val));
+              val = getMyDouble(fromBase64(val));
             }
             player[tc](val);
           }
