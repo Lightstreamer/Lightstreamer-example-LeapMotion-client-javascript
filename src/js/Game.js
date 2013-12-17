@@ -68,6 +68,13 @@ define(["./Constants","./Cube"],
         this.updatePlayer(key,itemUpdate);
       },
       
+      onUnsubscription: function() {
+        var that = this;
+        this.forEachPlayer(function(player) {
+          that.removePlayer(player.getKey());
+        });
+      },
+      
       forEachPlayer: function(cb) {
         for (var i in this.players) {
           cb(this.players[i]);
