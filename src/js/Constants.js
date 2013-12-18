@@ -19,7 +19,8 @@ define(function() {
     FRAME_INTERVAL: 50,
     BASE_RATE: 10,
     
-    DEFAULT_NICK: "Anonymous"
+    DEFAULT_NICK: "Anonymous",
+    ROOM: "leap"
   };
   
 });

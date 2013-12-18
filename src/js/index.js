@@ -66,7 +66,7 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
   gameLoop.start();
   
   var player = new Player(Constants.DEFAULT_NICK,"",lsClient);
-  player.enterRoom("leap");
+  player.enterRoom(Constants.ROOM);
   player.addListener({
     onError: function() {
       console.log("player error");
@@ -83,14 +83,14 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
   });
   LeapMotion.addListener({
     onFist: function(sx,sy,sz) {
-      player.grab("leap");
+      player.grab(Constants.ROOM);
     },
     onFistReleased: function(sx,sy,sz) {
-      player.release("leap",sx,sy,sz);
+      player.release(Constants.ROOM,sx,sy,sz);
     },
     onFistMove: function(x,y,z) {
       if (LeapMotion.isFist()) {
-        player.move("leap",x,y,z);
+        player.move(Constants.ROOM,x,y,z);
       }
     }
   });
