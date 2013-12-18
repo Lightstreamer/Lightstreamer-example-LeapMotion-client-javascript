@@ -13,8 +13,13 @@ Copyright 2013 Weswit s.r.l.
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-define(["Inheritance","EventDispatcher"],
-    function(Inheritance,EventDispatcher) {
+define(["Inheritance","EventDispatcher","Subscription","./Constants","./ConsoleSubscriptionListener"],
+    function(Inheritance,EventDispatcher,Subscription,Constants,ConsoleSubscriptionListener) {
+  
+  var nextId=0;
+  function generateId() {
+    return "anonymous"+nextId++; //TODO random generate
+  }
   
   var Player = function(nick,status,client) {
     this.initDispatcher();
@@ -23,8 +28,19 @@ define(["Inheritance","EventDispatcher"],
     this.nick = nick;
     this.status = status;
     
+    this.id = generateId(); 
+    this.userSubscription = new Subscription("DISTINCT","user_"+this.id,["message","from"]); //USER_SUBSCRIPTION used only to signal presence
+    this.userSubscription.setRequestedSnapshot("yes");
+    this.userSubscription.addListener(this);
+    this.client.subscribe(this.userSubscription);
+    
+    if (Constants.LOG_UPDATES_ON_CONSOLE) {
+      this.userSubscription.addListener(new ConsoleSubscriptionListener("User"));
+    }
+    
     this.rooms = {};
     this.playing = false;
+    
   };
   
   Player.prototype = {
@@ -35,6 +51,8 @@ define(["Inheritance","EventDispatcher"],
           return;
         }
         this.playing = true;
+
+        this.dispatchEvent("onIdConfirmed",[this.id]);
        
         //conf nick & status
         this.sendNick();
@@ -51,6 +69,13 @@ define(["Inheritance","EventDispatcher"],
           return;
         }*/
         this.playing = false;
+      },
+      
+      retry: function() {
+        this.id = generateId();
+        this.client.unsubscribe(this.userSubscription);
+        this.userSubscription.setItems(["user_"+this.id]);
+        this.client.subscribe(this.userSubscription);
       },
       
       /**
@@ -143,7 +168,21 @@ define(["Inheritance","EventDispatcher"],
         this.sendMessage("status|"+this.status,"status");
       },
       
-      //message listener
+      //subscription listener-->
+      
+      onSubscription: function() {
+        this.ready();
+      },
+      
+      onUnsubscription: function() {
+        this.reset();
+      },
+      
+      onSubscriptionError: function(code,mex) {
+        this.retry();
+      },
+      
+      //message listener-->
      
       // onDiscarded onAbort onProcessed -> do nothing
       
