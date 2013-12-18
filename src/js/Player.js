@@ -118,11 +118,11 @@ define(["Inheritance","EventDispatcher","Subscription","./Constants","./ConsoleS
        * @private
        */
       enterRoomInternal: function(room) {
-        this.sendMessage("enter|"+room,room);
+        this.sendMessage("enter|"+room,"enterexit");
       },
       
       exitRoom: function(room) {
-        this.sendRoomMessage("leave|"+room,room,room);
+        this.sendRoomMessage("leave|"+room,"enterexit",room);
       },
       
       grab: function(room) {
