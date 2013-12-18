@@ -14,8 +14,8 @@ Copyright 2013 Weswit s.r.l.
    limitations under the License.
 */
 
-require(["js/LeapMotion.js"],
-    function(LeapMotion) {
+require(["js/Constants","js/LeapMotion.js"],
+    function(Constants,LeapMotion) {
   
   $(document).ready(function() {
     function showInstructions(show) {
@@ -35,6 +35,24 @@ require(["js/LeapMotion.js"],
         showInstructions(ready);
       }
     });
+    
+    if (Constants.DEBUG_LEAP) {
+      $("#debug").show();
+      LeapMotion.addListener({
+        onFist: function(sx,sy,sz) {
+          $("#h").html("fist");
+        },
+        onFistReleased: function(sx,sy,sz) {
+          $("#h").html("palm");
+          $("#s").html(sx + " | " + sy + " | " + sz);
+        },
+        onFistMove: function(x,y,z) {
+          $("#x").html(x);
+          $("#y").html(y);
+          $("#z").html(z);
+        }
+      });
+    }
   });
 });
   
