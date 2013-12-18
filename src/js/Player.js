@@ -138,6 +138,9 @@ define(["Inheritance","EventDispatcher","Subscription","./Constants","./ConsoleS
       },
       
       changeNick: function(newNick) {
+        if (this.nick == newNick) {
+          return;
+        }
         this.nick = newNick;
         this.sendNick();
       },
@@ -153,6 +156,9 @@ define(["Inheritance","EventDispatcher","Subscription","./Constants","./ConsoleS
       },
       
       changeStatus: function(newStatus) {
+        if (this.status == newStatus) {
+          return;
+        }
         this.status = newStatus;
         this.sendStatus();
       },
