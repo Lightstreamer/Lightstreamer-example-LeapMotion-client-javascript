@@ -18,18 +18,50 @@
 -->
 
 <html>
-
   <head>
+    <title>Lightstreamer :: Leap Motion Demo</title>
+  
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    
+    <script src="js/floatencoding_b64.js"></script>
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://js.leapmotion.com/0.3.0-beta2/leap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.min.js"></script>
+    <script src="js/helvetiker_regular.typeface.js"></script>
+    <script src="js/droid_serif_bold.typeface.js"></script>
+    <script src="js/droid_serif_regular.typeface.js"></script>
     
     <script src="js/lightstreamer.js"></script>
     <script src="js/index.js"></script>
   </head>
   <body>
-  
+    <a href="https://github.com/Weswit/Lightstreamer-example-LeapDemo-client-javascript"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <div id="wrap">
+      <div>
+        <a id="logo" href="http://www.lightstreamer.com" target="_blank"><img src="images/logo.png" alt="LIGHTSTREAMER" hspace="0" border="0" /></a>
+        <a id="logoLeap" href="https://www.leapmotion.com/" target="_blank"><img src="images/leap.png" alt="LEAP MOTION" hspace="0" border="0" /></a>
+      </div>
+      
+      <div id="content">
+        <div id="description"></div>
+        <div id="waiting_leap">Please connect your leap motion device!<br>
+         Don't have a leap motion? You can still get one, watch others using theirs or head to our <a href="http://demos.lightstreamer.com/3DWorldDemo/">keyboard friendly 3D World Demo</a>
+        </div>
+        <div id="leap_instructions">Grab your block (the red one) by making a fist, then move it around. You can also throw it if it pleases you.</div>
+        
+        <div id="debug">
+          <div id="x"></div>
+          <div id="y"></div>
+          <div id="z"></div>
+          <div id="h"></div>
+          <div id="s"></div>
+        </div>
+         
+        
+        <div id="theWorld"></div>
+      </div>
+    </div>
   </body>
-</html>  
+</html>

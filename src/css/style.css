@@ -1,4 +1,32 @@
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  font-family: 'helvetica neue', Helvetica, Arial;
+}
+#wrap {
+  margin: 0 auto;
+  width: 776px;
+}
 #theWorld {
   background-color: #0D0D0D;
   border: 0;
+}
+
+#debug {
+	display: none;
+}
+#leap_instructions, #waiting_leap {
+	display: none;
+}
+
+#logo, #logoLeap {
+  float: left;
+}
+#logoLeap {
+  padding-left: 50px;
+}
+
+#content {
+  clear:both;
+  padding-top:12px;
 }
