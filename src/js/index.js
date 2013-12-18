@@ -39,14 +39,48 @@ require(["js/LeapMotion.js"],
 });
   
 
-require(["js/Field","js/Game","js/GameLoop"],
-    function(Field,Game,GameLoop) {
+require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Player","js/LeapMotion"],
+    function(Constants,lsClient,Field,Game,GameLoop,Player,LeapMotion) {
 
   var field = new Field($("#theWorld")[0]);
   var game = new Game(field);
   var gameLoop = new GameLoop(game,field,Constants.FRAME_INTERVAL,Constants.BASE_RATE);
-
+  gameLoop.start();
+  
+  var player = new Player(Constants.DEFAULT_NICK,"",lsClient);
+  player.enterRoom("leap");
+  player.addListener({
+    onError: function() {
+      console.log("player error");
+    },
+    onIdConfirmed: function(id) {
+      game.setLocalPlayerKey(id);
+    }
+  });
+  $("#nick").val(Constants.DEFAULT_NICK).prop('disabled', false).keyup(function() {
+    player.changeNick($(this).val());
+  });
+  $("#status").prop('disabled', false).keyup(function() {
+    player.changeStatus($(this).val());
+  });
+  LeapMotion.addListener({
+    onFist: function(sx,sy,sz) {
+      player.grab("leap");
+    },
+    onFistReleased: function(sx,sy,sz) {
+      player.release("leap",sx,sy,sz);
+    },
+    onFistMove: function(x,y,z) {
+      if (LeapMotion.isFist()) {
+        player.move("leap",x,y,z);
+      }
+    }
+  });
+  
 });
   
+
+
+
  
   
