@@ -13,8 +13,8 @@ Copyright 2013 Weswit s.r.l.
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-define(["./Constants","./Cube"],
-    function(Constants,Cube) {
+define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
+    function(Constants,Cube,ConsoleSubscriptionListener,Subscription) {
   
   var BRIDGE_CALL = {
     nick: "setNick",
@@ -44,7 +44,7 @@ define(["./Constants","./Cube"],
       rotW: true
   };
   
-  var Game = function(field) {
+  var Game = function(client,room,field) {
     this.players = {};
     this.field = field;
     
@@ -52,6 +52,37 @@ define(["./Constants","./Cube"],
     
     this.extraInfo = null;
     this.showExtraInfo(true);
+    
+    
+    var roomSubscription = new Subscription("COMMAND","roomchatlist_"+room,["command","key"]);  //ROOMCHATLIST_SUBSCRIPTION contains user statuses and user nicks
+    roomSubscription.setRequestedSnapshot("yes");
+    roomSubscription.setCommandSecondLevelFields(["nick","status",
+                                                  "posX","posY","posZ",
+                                                  "rotX","rotY","rotZ","rotW",
+                                                  "dVx","dVy","dVz",
+                                                  "dRx","dRy","dRz"]);
+    if (Constants.LOG_UPDATES_ON_CONSOLE) {
+      roomSubscription.addListener(putUpdatesOnConsole("Room list"));
+    }
+    roomSubscription.addListener(this);
+    
+    
+    
+    var posSubscription = new Subscription("COMMAND","roompos_"+room,["command","key", 
+                                                                        "posX","posY","posZ",
+                                                                        "rotX","rotY","rotZ","rotW",]); //ROOMPOSITION_SUBSCRIPTION contains list of users and object positions
+    posSubscription.setRequestedSnapshot("yes");
+    posSubscription.setRequestedMaxFrequency(0.5);
+    posSubscription.addListener(this);
+    
+    if (Constants.LOG_UPDATES_ON_CONSOLE) {
+      roomSubscription.addListener(new ConsoleSubscriptionListener("Room"));
+      posSubscription.addListener(new ConsoleSubscriptionListener("Positions"));
+    }
+    
+    client.subscribe(roomSubscription);
+    client.subscribe(posSubscription);
+    
   };
   
   Game.prototype = {

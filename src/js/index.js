@@ -14,7 +14,7 @@ Copyright 2013 Weswit s.r.l.
    limitations under the License.
 */
 
-require(["js/Constants","js/LeapMotion.js"],
+require(["js/Constants","js/LeapMotion"],
     function(Constants,LeapMotion) {
   
   $(document).ready(function() {
@@ -61,26 +61,24 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     function(Constants,lsClient,Field,Game,GameLoop,Player,LeapMotion) {
 
   var field = new Field($("#theWorld")[0]);
-  var game = new Game(field);
+  var game = new Game(lsClient,Constants.ROOM,field);
   var gameLoop = new GameLoop(game,field,Constants.FRAME_INTERVAL,Constants.BASE_RATE);
   gameLoop.start();
   
   var player = new Player(Constants.DEFAULT_NICK,"",lsClient);
-  player.enterRoom(Constants.ROOM);
   player.addListener({
-    onError: function() {
-      console.log("player error");
-    },
     onIdConfirmed: function(id) {
       game.setLocalPlayerKey(id);
-    }
+    }//, onError
   });
+  
   $("#nick").val(Constants.DEFAULT_NICK).prop('disabled', false).keyup(function() {
     player.changeNick($(this).val());
   });
   $("#status").prop('disabled', false).keyup(function() {
     player.changeStatus($(this).val());
   });
+  
   LeapMotion.addListener({
     onFist: function(sx,sy,sz) {
       player.grab(Constants.ROOM);
@@ -95,6 +93,19 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     }
   });
   
+  if (LeapMotion.isReady()) {
+    player.enterRoom(Constants.ROOM);
+  } else {
+    LeapMotion.addListener({
+      onReady: function(ready) {
+        if (ready) {
+          player.enterRoom(Constants.ROOM);
+        } else {
+          player.exitRoom(Constants.ROOM);
+        }
+      }
+    });
+  }
 });
   
 
