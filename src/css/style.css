@@ -5,7 +5,6 @@ body {
 }
 #wrap {
   margin: 0 auto;
-  width: 776px;
 }
 #theWorld {
   background-color: #0D0D0D;
@@ -17,6 +16,7 @@ body {
 }
 #leap_instructions, #waiting_leap {
 	display: none;
+	padding-bottom: 25px;
 }
 
 #logo, #logoLeap {

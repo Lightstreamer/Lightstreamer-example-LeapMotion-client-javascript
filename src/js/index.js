@@ -38,4 +38,15 @@ require(["js/LeapMotion.js"],
   });
 });
   
+
+require(["js/Field","js/Game","js/GameLoop"],
+    function(Field,Game,GameLoop) {
+
+  var field = new Field($("#theWorld")[0]);
+  var game = new Game(field);
+  var gameLoop = new GameLoop(game,field,Constants.FRAME_INTERVAL,Constants.BASE_RATE);
+
+});
+  
+ 
   
