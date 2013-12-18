@@ -18,8 +18,7 @@ define(function() {
     this.setupAxis();
     this.setupAxisNames();
 
-    var sphere = this.setupShere();
-    this.setupCamera(sphere);
+    this.setupCamera();
     
     this.setupLight();
     
@@ -55,10 +54,10 @@ define(function() {
       /**
        * @private
        */
-      setupCamera: function(lookAt) {
+      setupCamera: function() {
         var v = this.webGLinUse ? 0.1 : 1;
         this.camera = new THREE.PerspectiveCamera(45, WIDTH/HEIGHT, v, 10000); 
-        this.camera.lookAt( lookAt.position );
+        this.camera.lookAt( {x:0,y:0,z:0} );
         this.camera.position.z = 140;
         
         if ( (WIDTH/HEIGHT) <=  1.5) {
@@ -174,16 +173,6 @@ define(function() {
         var line3 = new THREE.Line( plane3, material );
         line3.type = THREE.LinePieces;
         this.group.add( line3 );
-      },
-      /**
-       * @private
-       */
-      setupShere: function() {
-        var materialSphere = new THREE.MeshLambertMaterial( { color: 0xffc32b } );
-        var sphere = new THREE.Mesh( new THREE.SphereGeometry( 1, 0.2, 0.2 ), materialSphere );
-        sphere.name = "Center";
-        this.group.add( sphere );
-        return sphere;
       },
       
       /**
