@@ -56,6 +56,8 @@ define(["Inheritance","EventDispatcher","./Constants"],
     this.controller = new Leap.Controller();
     this.registerCallbacks();
     this.controller.connect();
+    
+    this.ready = false;
   };
   
   LeapMotion.prototype = {
@@ -68,9 +70,33 @@ define(["Inheritance","EventDispatcher","./Constants"],
         this.controller.on('frame', function(frame) { 
           that.onFrame(frame);
         });
+        
+        this.controller.on('ready', function() { 
+          that.setReady(true);
+        });
+        this.controller.on('deviceConnected', function() { 
+          that.setReady(true);
+        });
+        this.controller.on('deviceDisconnected', function() { 
+          that.setReady(false);
+        });
       },
       
-     
+      /**
+       * @private
+       */
+      setReady: function(ready) {
+        if (ready == this.ready) {
+          return;
+        }
+        this.ready = ready;
+        this.dispatchEvent("onReady",[ready]);
+        
+      },
+      
+      isReady: function() {
+        return this.ready;
+      },
       
       /**
        * @private
