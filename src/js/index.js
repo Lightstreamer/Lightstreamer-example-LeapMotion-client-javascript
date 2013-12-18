@@ -13,23 +13,29 @@ Copyright 2013 Weswit s.r.l.
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-require(["js/LeapMotion"], function(LeapMotion) {
+
+require(["js/LeapMotion.js"],
+    function(LeapMotion) {
+  
   $(document).ready(function() {
-
-
-    LeapMotion.addListener({
-      
-      onFist: function() {
-        console.log("FIST");
-      },
-      
-      onFistReleased: function() {
-        console.log("PALM");
+    function showInstructions(show) {
+      if (show) {
+        $("#waiting_leap").hide();
+        $("#leap_instructions").show();
+      } else {
+        $("#waiting_leap").show();
+        $("#leap_instructions").hide();
       }
-      
+    }
+    setTimeout(function() {
+      showInstructions(LeapMotion.isReady());
+    },1000);
+    LeapMotion.addListener({
+      onReady: function(ready) {
+        showInstructions(ready);
+      }
     });
-    
-    
-    
   });
 });
+  
+  
