@@ -54,7 +54,13 @@ define(["./Constants","./Cube"],
       },
       
       setLocalPlayerKey: function(key) {
+        if (this.localPlayerKey && this.players[this.localPlayerKey]) {
+          this.players[this.localPlayerKey].changeType(Constants.OTHER);
+        }
         this.localPlayerKey = key;
+        if (this.players[key]) {
+          this.players[key].changeType(Constants.OWN);
+        }
       },
       
       onItemUpdate: function(itemUpdate) {

@@ -56,6 +56,17 @@ define(["./Constants"],function(Constants) {
         this.field.addObject(this.cube);
       },
       
+      changeType: function(newType) {
+        if (newType == this.type) {
+          return;
+        }
+        this.type = newType;
+        this.cube.material = materials[this.type];
+        if (this.text) {
+          this.text.material = materials[this.type];
+        }
+      },
+      
       clear: function() {
         this.field.removeObject(this.cube);
         this.cube = null;
