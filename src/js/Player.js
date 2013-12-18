@@ -15,10 +15,9 @@ Copyright 2013 Weswit s.r.l.
 */
 define(["Inheritance","EventDispatcher","Subscription","./Constants","./ConsoleSubscriptionListener"],
     function(Inheritance,EventDispatcher,Subscription,Constants,ConsoleSubscriptionListener) {
-  
-  var nextId=0;
+
   function generateId() {
-    return "anonymous"+nextId++; //TODO random generate
+    return "u-"+Math.round(Math.random()*1000);
   }
   
   var Player = function(nick,status,client) {
