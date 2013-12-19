@@ -13,6 +13,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+
+//TODO make it a module, get rid of unused code
    
 
 //////////////// Base 64 encoding
