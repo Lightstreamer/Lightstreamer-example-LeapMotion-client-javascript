@@ -1,4 +1,4 @@
-# Lightstreamer - Leap Motion Demos - HTML Clients #
+# Lightstreamer - Leap Motion Demo - HTML Clients #
 
 _TODO Intro_
 
