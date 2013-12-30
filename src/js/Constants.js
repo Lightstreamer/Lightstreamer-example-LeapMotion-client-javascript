@@ -18,6 +18,7 @@ define(function() {
     
     FRAME_INTERVAL: 50,
     BASE_RATE: 10,
+    LOCAL_PLAYER_RT: false,
     
     DEFAULT_NICK: "Anonymous",
     ROOM: "leap"

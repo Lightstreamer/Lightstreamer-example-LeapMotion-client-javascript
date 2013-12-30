@@ -79,34 +79,36 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     player.changeStatus($(this).val());
   });
   
-  LeapMotion.addListener({
-    onFist: function(sx,sy,sz) {
-      player.grab(Constants.ROOM);
-    },
-    onFistReleased: function(sx,sy,sz) {
-      player.release(Constants.ROOM,sx,sy,sz);
-    },
-    onFistMove: function(x,y,z) {
-      if (LeapMotion.isFist()) {
-        player.move(Constants.ROOM,x,y,z);
-        game.moveLocalPlayer(x,y,z); //update local player locally - TODO prevent server synch on local player during grabbing
-      }
-    }
-  });
-  
-  if (LeapMotion.isReady()) {
-    player.enterRoom(Constants.ROOM);
-  } else {
     LeapMotion.addListener({
-      onReady: function(ready) {
-        if (ready) {
-          player.enterRoom(Constants.ROOM);
-        } else {
-          player.exitRoom(Constants.ROOM);
+      onFist: function(sx,sy,sz) {
+        player.grab(Constants.ROOM);
+      },
+      onFistReleased: function(sx,sy,sz) {
+        player.release(Constants.ROOM,sx,sy,sz);
+      },
+      onFistMove: function(x,y,z) {
+        if (LeapMotion.isFist()) {
+          player.move(Constants.ROOM,x,y,z);
+          if (!Constants.LOCAL_PLAYER_RT) {
+            game.moveLocalPlayer(x,y,z); //update local player locally - TODO prevent server synch on local player during grabbing
+          }
         }
       }
     });
-  }
+    
+    if (LeapMotion.isReady()) {
+      player.enterRoom(Constants.ROOM);
+    } else {
+      LeapMotion.addListener({
+        onReady: function(ready) {
+          if (ready) {
+            player.enterRoom(Constants.ROOM);
+          } else {
+            player.exitRoom(Constants.ROOM);
+          }
+        }
+      });
+    }
   
   if (Constants.SIMULATE_LEAP) {
     Simulator(player,game);

@@ -48,7 +48,9 @@ define(["./Constants"],function(Constants) {
       }
       
       player.move(Constants.ROOM,p["x"],p["y"],p["z"]);
-      game.moveLocalPlayer(p["x"],p["y"],p["z"]);
+      if (!Constants.LOCAL_PLAYER_RT) {
+        game.moveLocalPlayer(p["x"],p["y"],p["z"]);
+      }
     },50);
   };
   
