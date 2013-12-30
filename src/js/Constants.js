@@ -8,6 +8,7 @@ define(function() {
     ADAPTER: "LEAPDEMO",
     LOG_UPDATES_ON_CONSOLE: false,
     DEBUG_LEAP: false,
+    SIMULATE_LEAP: false,
     
     MAX_SIZE: {
      x:80,

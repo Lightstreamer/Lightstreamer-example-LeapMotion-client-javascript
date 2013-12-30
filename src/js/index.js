@@ -57,8 +57,8 @@ require(["js/Constants","js/LeapMotion"],
 });
   
 
-require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Player","js/LeapMotion"],
-    function(Constants,lsClient,Field,Game,GameLoop,Player,LeapMotion) {
+require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Player","js/LeapMotion","js/Simulator"],
+    function(Constants,lsClient,Field,Game,GameLoop,Player,LeapMotion,Simulator) {
 
   var field = new Field($("#theWorld")[0]);
   var game = new Game(lsClient,Constants.ROOM,field);
@@ -89,6 +89,7 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     onFistMove: function(x,y,z) {
       if (LeapMotion.isFist()) {
         player.move(Constants.ROOM,x,y,z);
+        game.moveLocalPlayer(x,y,z); //update local player locally - TODO prevent server synch on local player during grabbing
       }
     }
   });
@@ -105,6 +106,10 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
         }
       }
     });
+  }
+  
+  if (Constants.SIMULATE_LEAP) {
+    Simulator(player,game);
   }
 });
   

@@ -56,6 +56,7 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
     
     var roomSubscription = new Subscription("COMMAND","roomchatlist_"+room,["command","key"]);  //ROOMCHATLIST_SUBSCRIPTION contains user statuses and user nicks
     roomSubscription.setRequestedSnapshot("yes");
+    //roomSubscription.setRequestedMaxFrequency("unfiltered");
     roomSubscription.setCommandSecondLevelFields(["nick","status",
                                                   "posX","posY","posZ",
                                                   "rotX","rotY","rotZ","rotW",
@@ -173,6 +174,18 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
             player[tc](val);
           }
         });
+      },
+      moveLocalPlayer: function(x,y,z) {
+        if (this.localPlayerKey) {
+          this.movePlayer(this.localPlayerKey,x,y,z);
+        } 
+      },
+      movePlayer: function(id,x,y,z) {
+        if (this.players[id]) {
+          this.players[id].setPosX(x);
+          this.players[id].setPosY(y);
+          this.players[id].setPosZ(z);
+        }
       }
       
   };
