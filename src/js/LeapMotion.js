@@ -156,7 +156,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
         } else {
           speeds = [0,0,0];
         }
-        this.dispatchEvent(isFist ? "onFist" : "onFistReleased",speeds); //TODO give info about the forces 
+        this.dispatchEvent(isFist ? "onFist" : "onFistReleased",speeds);
         this.fist = isFist;
       }
       
