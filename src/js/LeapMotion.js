@@ -138,21 +138,26 @@ define(["Inheritance","EventDispatcher","./Constants"],
        */
       getHandInUse: function(frame) {
         var hands = frame.hands;
-        if (hands.length == 0) {
-          this.handInUse = null;
-          return null;
-        }
+        
+        var centerHand = null; 
+        
         for (var i=0; i<hands.length; i++) {
           if (!checkHandValidPosition(frame,hand.palmPosition)) {
             continue;
           }
-          if (hands[i].id == this.handInUse || this.handInUse === null) {
-            this.handInUse = hands[i].id;
+          if (hands[i].id == this.handInUse) {
             return hands[i];
+            
+          } else if (!centerHand) {
+            centerHand = hands[i];
+              
+          } else if (Math.abs(hands[i].palmPosition[POSITIONS["x"]]) < Math.abs(centerHand.palmPosition[POSITIONS["x"]])) {
+            centerHand = hands[i];
           }
+
         }
-        this.handInUse = null;
-        return this.getHandInUse(frame);
+        this.handInUse = centerHand.id;
+        return centerHand;
         
       },
     
