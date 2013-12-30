@@ -114,7 +114,6 @@ define(["Inheritance","EventDispatcher","./Constants"],
        * @private
        */
       onFrame: function(frame) {
-        //better way to handle a single-hand application?
         var hand = this.getHandInUse(frame);
         if (!hand) {
           this.setFist(false); //remove the hand == remove the fist
