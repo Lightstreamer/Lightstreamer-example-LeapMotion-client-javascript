@@ -25,6 +25,8 @@ define(["./Constants"],function(Constants) {
   return function(player, game) {
     player.enterRoom(Constants.ROOM);
     player.grab(Constants.ROOM);
+    game.lockLocalPlayer(true);
+    
    
     setInterval(function() {
       c++;

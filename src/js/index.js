@@ -85,9 +85,15 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     LeapMotion.addListener({
       onFist: function(sx,sy,sz) {
         player.grab(Constants.ROOM);
+        if (!Constants.LOCAL_PLAYER_RT) {
+          game.lockLocalPlayer(true);
+        }
       },
       onFistReleased: function(sx,sy,sz) {
         player.release(Constants.ROOM,sx,sy,sz);
+        if (!Constants.LOCAL_PLAYER_RT) {
+          game.lockLocalPlayer(false);
+        }
       },
       onFistMove: function(x,y,z) {
         if (LeapMotion.isFist()) {

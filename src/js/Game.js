@@ -34,6 +34,12 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
     dRz: "setDRZ"
   };
   
+  var LOCKABLE_PROPS = {
+      posX: true,
+      posY: true,
+      posZ: true
+  };
+  
   var CONVERT = {
       posX: true,
       posY: true,
@@ -49,6 +55,7 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
     this.field = field;
     
     this.localPlayerKey = null;
+    this.localPlayerIsLocked = false;
     
     this.extraInfo = null;
     this.showExtraInfo(true);
@@ -165,7 +172,12 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
           return;
         }
         
+        var locked = this.localPlayerIsLocked && key == this.localPlayerKey;
+        if (!locked) console.log(key);
         itemUpdate.forEachChangedField(function(name,pos,val) {
+          if (locked && LOCKABLE_PROPS[name]) {
+            return;
+          }
           var tc = BRIDGE_CALL[name];
           if (val !== null && tc) {
             if (CONVERT[name]) {
@@ -186,6 +198,9 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
           this.players[id].setPosY(y);
           this.players[id].setPosZ(z);
         }
+      },
+      lockLocalPlayer: function(locked) {
+        this.localPlayerIsLocked = locked;
       }
       
   };
