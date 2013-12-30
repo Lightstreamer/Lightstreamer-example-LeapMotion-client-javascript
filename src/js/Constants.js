@@ -16,6 +16,13 @@ define(function() {
      z:60
     },
     
+    //TODO tune
+    LEAP_PADDING: {
+      x: 10,
+      y: 10,
+      z: 10
+    },
+    
     FRAME_INTERVAL: 50,
     BASE_RATE: 10,
     LOCAL_PLAYER_RT: false,

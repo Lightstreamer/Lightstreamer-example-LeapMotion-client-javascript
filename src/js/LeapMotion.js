@@ -24,6 +24,18 @@ define(["Inheritance","EventDispatcher","./Constants"],
       z: 2
   };
   
+  function checkHandValidPositionOnAxis(frame,leapPos,axis) {
+    var pos = POSITIONS[axis];
+    var abs = frame.interactionBox.size[pos]/2-Constants.LEAP_PADDING[pos];
+    return Math.abs(leapPos[pos]) <= abs;
+  }
+  
+  function checkHandValidPosition(frame,leapPos) {
+    return checkHandValidPositionOnAxis(frame,leapPos,"x") &&
+    checkHandValidPositionOnAxis(frame,leapPos,"y") &&
+    checkHandValidPositionOnAxis(frame,leapPos,"z");
+  }
+  
   function convert(frame,leapPos,axis) {
     var pos = POSITIONS[axis];
 
@@ -103,7 +115,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
        */
       onFrame: function(frame) {
         //better way to handle a single-hand application?
-        var hand = this.getHandInUse(frame.hands);
+        var hand = this.getHandInUse(frame);
         if (!hand) {
           this.setFist(false); //remove the hand == remove the fist
           return;
@@ -124,19 +136,23 @@ define(["Inheritance","EventDispatcher","./Constants"],
       /**
        * @private
        */
-      getHandInUse: function(hands) {
+      getHandInUse: function(frame) {
+        var hands = frame.hands;
         if (hands.length == 0) {
           this.handInUse = null;
           return null;
         }
         for (var i=0; i<hands.length; i++) {
+          if (!checkHandValidPosition(frame,hand.palmPosition)) {
+            continue;
+          }
           if (hands[i].id == this.handInUse || this.handInUse === null) {
             this.handInUse = hands[i].id;
             return hands[i];
           }
         }
         this.handInUse = null;
-        return this.getHandInUse(hands);
+        return this.getHandInUse(frame);
         
       },
     
