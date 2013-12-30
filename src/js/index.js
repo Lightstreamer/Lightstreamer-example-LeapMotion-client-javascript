@@ -79,6 +79,9 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
     player.changeStatus($(this).val());
   });
   
+  if (Constants.SIMULATE_LEAP) {
+    Simulator(player,game);
+  } else {
     LeapMotion.addListener({
       onFist: function(sx,sy,sz) {
         player.grab(Constants.ROOM);
@@ -109,10 +112,8 @@ require(["js/Constants","js/lsClient","js/Field","js/Game","js/GameLoop","js/Pla
         }
       });
     }
-  
-  if (Constants.SIMULATE_LEAP) {
-    Simulator(player,game);
   }
+  
 });
   
 
