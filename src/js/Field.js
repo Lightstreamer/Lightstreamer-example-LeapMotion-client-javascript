@@ -37,10 +37,41 @@ define(function() {
     
     this.setupLight();
     
+    this.setupSize();
+    
+    var that = this;
+    $(window).resize(function(){
+      that.setupSize();
+    });
+    
     this.render();
   };
   
   Field.prototype = {
+      
+      /**
+       * @private
+       */
+      setupSize: function() {
+        WIDTH = window.innerWidth;
+        HEIGHT = window.innerHeight;
+
+        if ( (WIDTH/HEIGHT) >  1.5) {
+          this.renderer.setSize(WIDTH-(WIDTH*0.075), HEIGHT-(HEIGHT*0.075));
+
+          this.camera.aspect = 2;
+          this.camera.updateProjectionMatrix();
+          
+        } else {
+          var zWide = (WIDTH-(WIDTH*0.075));
+          this.renderer.setSize(zWide, zWide/1.77777);
+          
+          this.camera.aspect = 1.77777;
+          this.camera.updateProjectionMatrix();
+        }
+        
+        this.render();
+      },
       
       /**
        * @private
@@ -52,13 +83,6 @@ define(function() {
         } catch (e) { 
           webGl = false;
           this.setupCanvas();
-        }
-        
-        if ( (WIDTH/HEIGHT) >  1.5) {
-          this.renderer.setSize(WIDTH-(WIDTH*0.075), HEIGHT-(HEIGHT*0.075));
-        } else {
-          zWide = (WIDTH-(WIDTH*0.075));
-          this.renderer.setSize(zWide, zWide/1.77777);
         }
         
         this.renderer.sortObjects = false;
@@ -75,10 +99,6 @@ define(function() {
         this.camera.lookAt( {x:0,y:0,z:0} );
         this.camera.position.z = 140;
         
-        if ( (WIDTH/HEIGHT) <=  1.5) {
-          this.camera.aspect = 1.77777;
-          this.camera.updateProjectionMatrix();
-        }
       },
       
       /**
