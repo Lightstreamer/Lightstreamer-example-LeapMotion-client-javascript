@@ -173,7 +173,6 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
         }
         
         var locked = this.localPlayerIsLocked && key == this.localPlayerKey;
-        if (!locked) console.log(key);
         itemUpdate.forEachChangedField(function(name,pos,val) {
           if (locked && LOCKABLE_PROPS[name]) {
             return;
