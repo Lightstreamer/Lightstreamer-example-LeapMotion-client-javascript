@@ -27,8 +27,24 @@ define(["./Constants"],function(Constants) {
     player.grab(Constants.ROOM);
     game.lockLocalPlayer(true);
     
+    var released = false;
+    
+    setInterval(function() {
+      if (released) {
+        player.grab(Constants.ROOM);
+        game.lockLocalPlayer(true);
+      } else {
+        player.release(Constants.ROOM,randomMovement()*100,randomMovement()*100,randomMovement()*100);
+        game.lockLocalPlayer(false);
+      }
+      released = !released;
+      
+    },5000);
    
     setInterval(function() {
+      if (released) {
+        return;
+      }
       c++;
       if (c >= cc) {
         for (var i in f) {
