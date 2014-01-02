@@ -233,9 +233,13 @@ define(["./Constants"],function(Constants) {
       
       setPos: function(axis,value) {
         if ( value >= Constants.MAX_SIZE[axis] ) {
-          value = Constants.MAX_SIZE[axis] * -1;
+          var diff = value - Constants.MAX_SIZE[axis];
+          value = Constants.MAX_SIZE[axis] * -1 - diff;
+
         }else if ( value <= (Constants.MAX_SIZE[axis] * -1) ) {
-          value = Constants.MAX_SIZE[axis];
+          var diff = Math.abs(value) - Constants.MAX_SIZE[axis];
+          value = Constants.MAX_SIZE[axis] + diff;
+
         }
         
         this.cube.position[axis] = value;
