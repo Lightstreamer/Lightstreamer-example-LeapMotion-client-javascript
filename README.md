@@ -1,18 +1,26 @@
-# Lightstreamer - Leap Motion Demo - HTML Clients #
+# Lightstreamer - Leap Motion Demo - HTML (leapjs, threejs) Client #
 
 <!-- START DESCRIPTION lightstreamer-example-leapmotion-client-javascript -->
 
-_TODO Intro_
+A simple application showing the integration between a [Leap Motion Controller](https://www.leapmotion.com/) and the Lightstreamer JavaScript Client library.
 
-_TODO Snapshot_ _TODO link_
+This demo displays a game field containing some small blocks. Each block is controlled by a different user connected to the same application through a Leap Motion Controller device. 
 
-_TODO Description_
+![screenshot](leapdemo.png) _TODO link_
+
+This page uses the *JavaScript Client API for Lightstreamer* to handle the communications with Lightstreamer Server, *leapjs* to read the users' hand movement through the Leap Motion Controller and
+*three.js* to display the users' positions on the browser.
+
+Each user can act on its own block in two different modes: he can make a fist to grab its block and drag it around the game field or release the fist and "throw" his block.
+In the first case all the hand positions are sent to the Lightstreamer server that in turn push them to all the curently connected clients, while on the latter case only 
+the applied forces are sent to the server and to the other clients; each client will calculate the current position of the block using the received forces and will re-synchronize 
+with the Lightstreamer server, that is calculating the various positions too, every few seconds. 
 
 <!-- END DESCRIPTION lightstreamer-example-leapmotion-client-javascript -->
 
 # Deploy #
 
-Before you can run the demos of this project some dependencies need to be solved:
+Before you can run this demo some dependencies need to be solved:
 
 -  Lightstreamer JS client is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
 -  RequireJS is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
