@@ -25,8 +25,11 @@ define(["Inheritance","EventDispatcher","./Constants"],
   };
   
   function checkHandValidPositionOnAxis(frame,leapPos,axis) {
+    if (Constants.LEAP_PADDING[axis] == 0) {
+      return true;
+    }
     var pos = POSITIONS[axis];
-    var abs = frame.interactionBox.size[pos]/2-Constants.LEAP_PADDING[pos];
+    var abs = frame.interactionBox.size[pos]-Constants.LEAP_PADDING[axis];
     return Math.abs(leapPos[pos]) <= abs;
   }
   
@@ -39,15 +42,19 @@ define(["Inheritance","EventDispatcher","./Constants"],
   function convert(frame,leapPos,axis) {
     var pos = POSITIONS[axis];
 
-    var converter = frame.interactionBox.size[pos]/(Constants.MAX_SIZE[axis]*2); //TODO not sure if frame.interactionBox.size can change overtime or not
+    //convert value from leap reeferences to field references (we're taking into account the full size, from -v to +v)
+    var converter = (frame.interactionBox.size[pos]-Constants.LEAP_PADDING[axis])/(Constants.MAX_SIZE[axis]*2); 
     var converted = leapPos[pos]/converter;
-    
+
+    //halve the value because it is or +v or -v
     if (axis == "y") {
+      //leap only has positive y while our field also has negative values, shift value accordingly
       val = (converted/2)-Constants.MAX_SIZE[axis];
     } else {
       val = converted/2;
     }
     
+    //put the correct sign on the converted value
     if (Math.abs(val) > Constants.MAX_SIZE[axis]) {
       if (val > 0) {
         val = Constants.MAX_SIZE[axis]-1;
@@ -141,7 +148,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
         var centerHand = null; 
         
         for (var i=0; i<hands.length; i++) {
-          if (!checkHandValidPosition(frame,hand.palmPosition)) {
+          if (!checkHandValidPosition(frame,hands[i].palmPosition)) {
             continue;
           }
           if (hands[i].id == this.handInUse) {
@@ -155,7 +162,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
           }
 
         }
-        this.handInUse = centerHand.id;
+        this.handInUse = centerHand ? centerHand.id : null;
         return centerHand;
         
       },

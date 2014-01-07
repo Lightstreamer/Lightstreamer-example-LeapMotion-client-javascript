@@ -18,9 +18,9 @@ define(function() {
     
     //TODO tune
     LEAP_PADDING: {
-      x: 10,
-      y: 10,
-      z: 10
+      x: 0,
+      y: 0,
+      z: 5
     },
     
     FRAME_INTERVAL: 50,
