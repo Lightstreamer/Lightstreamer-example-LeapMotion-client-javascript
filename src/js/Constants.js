@@ -16,11 +16,10 @@ define(function() {
      z:60
     },
     
-    //TODO tune
     LEAP_PADDING: {
-      x: 0,
+      x: 100,
       y: 0,
-      z: 5
+      z: 10
     },
     
     FRAME_INTERVAL: 50,
