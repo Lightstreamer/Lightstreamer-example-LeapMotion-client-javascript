@@ -1,4 +1,4 @@
-# Lightstreamer - Leap Motion Demo - HTML (leapjs, threejs) Client #
+# Lightstreamer - Leap Motion Demo - HTML (LeapJS, Three.js) Client #
 
 <!-- START DESCRIPTION lightstreamer-example-leapmotion-client-javascript -->
 
