@@ -41,7 +41,7 @@ Note that the [LEAPDEMO](https://github.com/Weswit/Lightstreamer-example-LeapMot
 
 # See Also #
 
-## Lightstreamer Adapter needed by this demo client ##
+## Lightstreamer Adapter Needed by This Demo Client ##
 <!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-LeapMotion-adapter-java)
