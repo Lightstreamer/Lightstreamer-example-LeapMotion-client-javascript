@@ -78,7 +78,7 @@ define(["./Constants","./Cube","./ConsoleSubscriptionListener","Subscription"],
     
     var posSubscription = new Subscription("COMMAND","roompos_"+room,["command","key", 
                                                                         "posX","posY","posZ",
-                                                                        "rotX","rotY","rotZ","rotW",]); //ROOMPOSITION_SUBSCRIPTION contains list of users and object positions
+                                                                        "rotX","rotY","rotZ","rotW"]); //ROOMPOSITION_SUBSCRIPTION contains list of users and object positions
     posSubscription.setRequestedSnapshot("yes");
     posSubscription.setRequestedMaxFrequency(0.5);
     posSubscription.addListener(this);
