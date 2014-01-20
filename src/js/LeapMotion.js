@@ -123,7 +123,7 @@ define(["Inheritance","EventDispatcher","./Constants"],
       onFrame: function(frame) {
         var hand = this.getHandInUse(frame);
         if (!hand) {
-          this.setFist(false); //remove the hand == remove the fist
+          this.setFist(null,false); //remove the hand == remove the fist
           return;
         }
         this.setFist(hand,hand.fingers.length <= FINGERS_OF_FIST);
