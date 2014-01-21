@@ -2,11 +2,12 @@
 
 <!-- START DESCRIPTION lightstreamer-example-leapmotion-client-javascript -->
 
-A simple application showing the integration between a [Leap Motion Controller](https://www.leapmotion.com/) and the Lightstreamer JavaScript Client library.
+A simple application showing the integration between a [Leap Motion Controller](https://www.leapmotion.com/) and the [Lightstreamer JavaScript Client library](http://www.lightstreamer.com/docs/client_javascript_uni_api/index.html).
 
 This demo displays a game field containing some small blocks. Each block is controlled by a different user connected to the same application through a Leap Motion Controller device. 
 
-![screenshot](leapdemo.png) _TODO link_
+[![screenshot](screen_leap_large.png)](http://demos.lightstreamer.com/LeapDemo/)<br>
+An online demonstration is hosted on our servers at: [http://demos.lightstreamer.com/LeapDemo/](http://demos.lightstreamer.com/LeapDemo/)<br>
 
 This page uses the *JavaScript Client API for Lightstreamer* to handle the communications with Lightstreamer Server, *leapjs* to read the users' hand movement through the Leap Motion Controller and
 *three.js* to display the users' positions on the browser.
