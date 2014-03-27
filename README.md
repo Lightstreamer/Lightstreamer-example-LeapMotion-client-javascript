@@ -13,7 +13,7 @@ This page uses the *JavaScript Client API for Lightstreamer* to handle the commu
 *three.js* to display the users' positions on the browser.
 
 Each user can act on its own block in two different modes: he can make a fist to grab its block and drag it around the game field or release the fist and "throw" his block.
-In the first case all the hand positions are sent to the Lightstreamer server that in turn push them to all the curently connected clients, while on the latter case only 
+In the first case all the hand positions are sent to the Lightstreamer server that in turn push them to all the currently connected clients, while on the latter case only 
 the applied forces are sent to the server and to the other clients; each client will calculate the current position of the block using the received forces and will re-synchronize 
 with the Lightstreamer server, that is calculating the various positions too, every few seconds. 
 
