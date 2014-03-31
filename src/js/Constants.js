@@ -15,11 +15,14 @@
 */
 define(function() {
   
+  var protocolToUse = document.location.protocol != "file:" ? document.location.protocol : "http:";
+  
   return {
     OWN: "own",
     OTHER: "other",
     GHOST: "ghost",
 
+    SERVER: protocolToUse+"//localhost:8080",
     ADAPTER: "LEAPDEMO",
     LOG_UPDATES_ON_CONSOLE: false,
     DEBUG_LEAP: false,
