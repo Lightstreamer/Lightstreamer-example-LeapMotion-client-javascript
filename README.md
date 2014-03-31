@@ -31,10 +31,10 @@ Before you can run this demo some dependencies need to be solved:
 
 You can deploy this demo inside Lightstreamer internal web server or in any other web server.
 If you choose the former please create a new folder under <LS_HOME>/pages/ and copy the contents of the src folder of this project there.
-The client demo configuration assume that Lightstreamer Server, Lightstreamer Adapters and this client are launched on the same machine.
-If you need to targeting a different Lightstreamer server please search this line in lsClient.js:
+The client demo configuration assume that Lightstreamer Server, Lightstreamer Adapters and this client are launched on the local machine.
+If you need to targeting a different Lightstreamer server please search this line in Constants.js:
 ```js
-var lsClient = new LightstreamerClient(protocolToUse+"//localhost:8080",Constants.ADAPTER);
+SERVER: protocolToUse+"//localhost:8080",
 ```
 and change it accordingly.
 
