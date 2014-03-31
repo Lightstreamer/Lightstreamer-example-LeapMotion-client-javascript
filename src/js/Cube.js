@@ -25,7 +25,7 @@ define(["./Constants"],function(Constants) {
   var NICK_OFFSET = {
       x: 2,
       y: 1,
-      z: 2,
+      z: 2
   };
   var MSG_OFFSET = {
       x: 0,
@@ -112,7 +112,7 @@ define(["./Constants"],function(Constants) {
               curveSegments: 0,
               
               font: "droid serif",
-              weight: "bold",
+              weight: "bold"
             });
         text3d.computeBoundingBox();
 
