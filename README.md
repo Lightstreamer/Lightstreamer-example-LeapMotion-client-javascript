@@ -6,7 +6,7 @@ It displays a game field containing some small blocks, where each block is contr
 
 This project includes a web client front-end for the *Leap Motion Demo*:
 
-As an example of [Lightstreamer Adapters Needed by This Client](https://github.com/Weswit/Lightstreamer-example-LeapMotion-client-javascript#lightstreamer-adapters-needed-by-this-client), you may refer to the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-LeapMotion-adapter-java).
+As an example of [Lightstreamer Adapters Needed by This Client](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-client-javascript#lightstreamer-adapters-needed-by-this-client), you may refer to the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-adapter-java).
 
 ## Live Demo
 
@@ -28,7 +28,7 @@ with the Lightstreamer server, which is calculating the various positions, too, 
 
 ## Install
 If you want to install a version of this demo pointing to your local Lightstreamer server, follow these steps:
-* As prerequisite, the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-LeapMotion-adapter-java) has to be deployed in your local Lightstreamer server instance. Please check out that project and follow the installation instructions provided with it.
+* As prerequisite, the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-adapter-java) has to be deployed in your local Lightstreamer server instance. Please check out that project and follow the installation instructions provided with it.
 *  Lightstreamer JS client is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
 *  RequireJS is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
 *  jQuery is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
@@ -43,7 +43,7 @@ The client demo configuration assumes that Lightstreamer Server, Lightstreamer A
 ### Lightstreamer Adapters Needed by This Client ##
 <!-- START RELATED_ENTRIES -->
 
-* [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-LeapMotion-adapter-java)
+* [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-adapter-java)
 
 <!-- END RELATED_ENTRIES -->
 
