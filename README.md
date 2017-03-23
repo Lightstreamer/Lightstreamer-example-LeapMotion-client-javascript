@@ -10,9 +10,9 @@ As an example of [Lightstreamer Adapters Needed by This Client](https://github.c
 
 ## Live Demo
 
-[![screenshot](screen_leap_large.png)](http://demos.lightstreamer.com/LeapDemo)
+[![screenshot](screen_leap_large.png)](http://demos.lightstreamer.com/LeapDemo)<br>
 
-###[![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/LeapDemo)
+### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/LeapDemo)
 
 ## Details
 
