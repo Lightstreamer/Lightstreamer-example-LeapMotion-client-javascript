@@ -1,7 +1,7 @@
 # Lightstreamer - Leap Motion Demo - HTML (LeapJS, Three.js) Client
 
 <!-- START DESCRIPTION lightstreamer-example-leapmotion-client-javascript -->
-The *Leap Motion Demo* is a simple application showing the integration between a [Leap Motion Controller](https://www.leapmotion.com/) and the [Lightstreamer JavaScript Client library](http://www.lightstreamer.com/docs/client_javascript_uni_api/index.html).
+The *Leap Motion Demo* is a simple application showing the integration between a [Leap Motion Controller](https://www.leapmotion.com/) and the [Lightstreamer JavaScript Client library](https://lightstreamer.com/api/ls-web-client/latest/index.html).
 It displays a game field containing some small blocks, where each block is controlled by a different user connected to the same application through a Leap Motion Controller device. 
 
 This project includes a web client front-end for the *Leap Motion Demo*:
@@ -10,7 +10,7 @@ As an example of [Lightstreamer Adapters Needed by This Client](https://github.c
 
 ## Live Demo
 
-[![screenshot](screen_leap_large.png)](http://demos.lightstreamer.com/LeapDemo)<br>
+[![screenshot](screen_leap_large.png)](http://demos.lightstreamer.com/LeapDemo)
 
 ### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/LeapDemo)
 
