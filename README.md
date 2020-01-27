@@ -29,11 +29,12 @@ with the Lightstreamer server, which is calculating the various positions, too, 
 ## Install
 If you want to install a version of this demo pointing to your local Lightstreamer server, follow these steps:
 * As prerequisite, the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-adapter-java) has to be deployed in your local Lightstreamer server instance. Please check out that project and follow the installation instructions provided with it.
-*  Lightstreamer JS client is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
-*  RequireJS is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
-*  jQuery is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
-*  leapjs is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
-*  three.js is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
+* Lightstreamer JS client is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
+* RequireJS is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
+* jQuery is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
+* leapjs is currently hot-linked in the html page (look for 0.3.0-beta2/leap.js), but you may need to replace it with a local version.
+You can find the version currently used in the demo [on Github](https://github.com/leapmotion/leapjs/blob/v0.3.0-beta2/leap.js), where newer versions are also available.
+* three.js is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
 * Deploy this demo on the Lightstreamer Server (used as Web server) or in any external Web Server. If you choose the former, please create the folder `<LS_HOME>/pages/LeapDemo` and copy here the contents of the `/src` folder of this project.
 The client demo configuration assumes that Lightstreamer Server, Lightstreamer Adapters, and this client are launched on the same machine. If you need to target a different Lightstreamer server, please search in `js/Constants.js` this line:<BR/> `SERVER: protocolToUse+"//localhost:8080"`<BR/> and change it accordingly.
 * Open your browser and point it to: [http://localhost:8080/LeapDemo/](http://localhost:8080/LeapDemo/)
