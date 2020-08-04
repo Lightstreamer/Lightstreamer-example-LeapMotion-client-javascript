@@ -29,7 +29,7 @@ with the Lightstreamer server, which is calculating the various positions, too, 
 ## Install
 If you want to install a version of this demo pointing to your local Lightstreamer server, follow these steps:
 * As prerequisite, the [Lightstreamer - Leap Motion Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-LeapMotion-adapter-java) has to be deployed in your local Lightstreamer server instance. Please check out that project and follow the installation instructions provided with it.
-* Get the `lightstreamer.js` file from [Lightstreamer distribution](http://www.lightstreamer.com/download) (see compatibility notes below) and put it in the `src` folder of the demo.
+* Get the `lightstreamer.js` file from [Lightstreamer distribution](http://www.lightstreamer.com/download/#ls70) (see compatibility notes below) and put it in the `src` folder of the demo.
 The version required by this demo can be found in Lightstreamer version 5.1.2 to 7.0.
 * RequireJS is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
 * jQuery is currently hot-linked in the html page: you may want to replace it with a local version and/or to upgrade its version.
